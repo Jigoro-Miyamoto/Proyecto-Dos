@@ -12,5 +12,5 @@ services:
     environment:
       FLASK_APP: app.py 
       FLASK_ENV: development 
-    
+      PORT: ${PORT:-5000}
      
