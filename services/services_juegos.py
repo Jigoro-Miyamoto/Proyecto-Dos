@@ -13,8 +13,8 @@ def get_video_juego(id):
 
 def añadir_juego(data):
     nuevo = VideoJuego(titulo = data["titulo"],
-                       genero = data["genero"],
-                       horas_jugadas = data["horas_jugadas"])
+                       horas_jugadas = data["horas_jugadas"],
+                       id_genero = data["id_genero"])
     db.session.add(nuevo)
     db.session.commit()
     return nuevo
@@ -23,7 +23,7 @@ def patch_juego(id, data):
     juego = get_video_juego(id)
     if not juego:
         return None
-    campos = ["titulo", "genero", "horas_jugadas"]
+    campos = ["titulo", "id_genero", "horas_jugadas"]
     for campo in campos:
         if campo in data:
             setattr(juego,campo, data[campo])
