@@ -4,7 +4,7 @@ import services.services_plantas as ps
 plantas_bp = Blueprint("plantas_api", __name__)
 
 
-@plantas_bp.route("/plantas", methods = ["POST"])
+@plantas_bp.route("", methods = ["POST"])
 
 def post_planta_r():
     data = request.get_json()
@@ -12,13 +12,13 @@ def post_planta_r():
     if not nueva_planta:
         return jsonify({"message": "Error al ingresar nueva planta"})
     return jsonify(nueva_planta.to_dict()), 201
-@plantas_bp.route("/plantas", methods = ["GET"])
+@plantas_bp.route("", methods = ["GET"])
 
 def get_plantas_r():
     plantas = ps.get_plantas()
     return jsonify(plantas),200
 
-@plantas_bp.route("/plantas/<int:id>", methods = ["GET"])
+@plantas_bp.route("/<int:id>", methods = ["GET"])
 
 def get_planta_r(id):
     planta = ps.get_planta(id)
@@ -26,7 +26,7 @@ def get_planta_r(id):
         return jsonify({"message":f"No se encontro la planta de id {id}"}), 404
     return jsonify(planta.to_dict()),200
 
-@plantas_bp.route("/plantas/<int:id>", methods = ["PATCH"])
+@plantas_bp.route("/<int:id>", methods = ["PATCH"])
 
 def patch_planta_r(id):
     data = request.get_json()
@@ -38,12 +38,14 @@ def patch_planta_r(id):
     return jsonify(planta.to_dict()),200
     
 
-@plantas_bp.route("/plantas/<int:id>", methods = ["DELETE"])
+@plantas_bp.route("/<int:id>", methods = ["DELETE"])
 def delete_planta_r(id):
-    planta = ps.delete_planta(id)
-    if not planta:
+    borrar = ps.delete_planta(id)
+    if borrar:
+        return jsonify({"message": "La planta se ha eliminado exitosamente"})
+    else:
         return jsonify({"message":f"No se encontro la planta de id {id}"}), 404
-    return jsonify({"message": "La planta se ha eliminado exitosamente"}), 204
+
     
 
 

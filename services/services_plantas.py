@@ -68,7 +68,7 @@ def get_planta(id):
     planta = Planta.query.get(id)
     if not planta:
         return None
-    return Planta
+    return planta
 
 def patch_planta(id, data):
     if not data:

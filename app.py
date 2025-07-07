@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 app.config.from_object(Config)
 db.init_app(app)
-app.register_blueprint(plantas_bp, url_prefix = '/api')
-app.register_blueprint(VideoJuegos_bp, url_prefix = '/api')
+app.register_blueprint(plantas_bp, url_prefix = '/plantas')
+app.register_blueprint(VideoJuegos_bp, url_prefix = '/juegos')
 
 with app.app_context():
     db.create_all()

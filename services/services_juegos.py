@@ -2,7 +2,8 @@ from database.models import VideoJuego
 from database import db
 
 def get_video_juegos():
-    return VideoJuego.query.all()
+    juegos =  VideoJuego.query.all()
+    return [juego.to_dict() for juego in juegos]
 
 def get_video_juego(id):
     juego = VideoJuego.query.get(id)

@@ -4,7 +4,7 @@ from services import services_juegos as JS
 
 VideoJuegos_bp = Blueprint('juegos_api', __name__)
 
-@VideoJuegos_bp.route("/videojuegos", methods = ["POST"])
+@VideoJuegos_bp.route("", methods = ["POST"])
 def añadir_juego_route():
     data = request.get_json()
     if not data:
@@ -12,13 +12,13 @@ def añadir_juego_route():
     nuevo = JS.añadir_juego(data)
     return jsonify(nuevo.to_dict()), 201
 
-@VideoJuegos_bp.route("/vodepjuegos", methods = ["GET"])
+@VideoJuegos_bp.route("", methods = ["GET"])
 
 def get_juegos_route():
-    juegos = JS.get_video_juegos
-    return jsonify([juego.to_dict() for juego in juegos])
+    juegos = JS.get_video_juegos()
+    return jsonify(juegos), 200
 
-@VideoJuegos_bp.route("/videojuegos/<int:id>", methods = ["GET"])
+@VideoJuegos_bp.route("/<int:id>", methods = ["GET"])
 
 def get_juego_route(id):
     juego = JS.get_video_juego(id)
@@ -26,7 +26,7 @@ def get_juego_route(id):
         return jsonify({"message":f"No se encontro el juego de id {id}"}), 404
     return jsonify(juego.to_dict())
 
-@VideoJuegos_bp.route("/videojuegos/<int:id>", methods = ["PATCH"])
+@VideoJuegos_bp.route("/<int:id>", methods = ["PATCH"])
 
 def patch_juegos_route(id):
     data = request.get_json()
@@ -37,7 +37,7 @@ def patch_juegos_route(id):
         return jsonify({"message":f"No se encontro el juego de id {id}"}), 404
     return jsonify(juego.to_dict())
 
-@VideoJuegos_bp.route("/videojuegos/<int:id>", methods = ["DELETE"])
+@VideoJuegos_bp.route("/<int:id>", methods = ["DELETE"])
 
 def delete_juego_route(id):
     juego = JS.delete_juego(id)
