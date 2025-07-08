@@ -32,7 +32,7 @@ PORT = 5000
 ```
 Puedes usar cualquier puerto que tengas disponible 
 
-3. **Inicializar Aplicación:
+3. **Inicializar Aplicación**:
 
 Puedes iniciar la aplicación de dos maneras:
 * Docker Compose
